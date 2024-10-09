@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <input type="text" id="tarefa" placeholder="Nova tarefa">
+    <button id="adicionar">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        const lista = document.getElementById('lista');
+        const tarefaInput = document.getElementById('tarefa');
+        
+        function atualizarLista() {
+            lista.innerHTML = '';
+            const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+            tarefas.forEach((tarefa, index) => {
+                const li = document.createElement('li');
+                li.textContent = tarefa;
+                const btnConcluir = document.createElement('button');
+                btnConcluir.textContent = 'Concluir';
+                btnConcluir.onclick = () => {
+                    li.style.textDecoration = 'line-through';
+                };
+                const btnExcluir = document.createElement('button');
+                btnExcluir.textContent = 'Excluir';
+                btnExcluir.onclick = () => {
+                    tarefas.splice(index, 1);
+                    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+                    atualizarLista();
+                };
+                li.appendChild(btnConcluir);
+                li.appendChild(btnExcluir);
+                lista.appendChild(li);
+            });
+        }
+
+        document.getElementById('adicionar').addEventListener('click', function() {
+            const tarefa = tarefaInput.value;
+            if (tarefa) {
+                const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+                tarefas.push(tarefa);
+                localStorage.setItem('tarefas', JSON.stringify(tarefas));
+                tarefaInput.value = '';
+                atualizarLista();
+            }
+        });
+
+        atualizarLista();
+    </script>
+</body>
+</html>

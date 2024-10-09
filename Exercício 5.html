@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Adivinhação</title>
+</head>
+<body>
+    <input type="number" id="palpite" placeholder="Adivinhe o número (1-100)">
+    <button id="adivinhar">Adivinhar</button>
+    <p id="resultado"></p>
+
+    <script>
+        let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+
+        document.getElementById('adivinhar').addEventListener('click', function() {
+            const palpite = parseInt(document.getElementById('palpite').value);
+            let resultado = document.getElementById('resultado');
+
+            if (palpite === numeroSecreto) {
+                resultado.textContent = 'Parabéns! Você acertou!';
+                numeroSecreto = Math.floor(Math.random() * 100) + 1; // Reinicia o jogo
+            } else if (palpite < numeroSecreto) {
+                resultado.textContent = 'Muito baixo! Tente novamente.';
+            } else {
+                resultado.textContent = 'Muito alto! Tente novamente.';
+            }
+        });
+    </script>
+</body>
+</html>

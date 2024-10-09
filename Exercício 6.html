@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulação de Classes</title>
+    <style>
+        .div1 { background-color: rgb(124, 230, 238); height: 100px; }
+        .div2 { background-color: rgb(235, 158, 235); height: 100px; }
+        .div3 { background-color: rgb(189, 231, 165); height: 100px; }
+        .nova-classe { background-color: rgb(159, 144, 240); }
+    </style>
+</head>
+<body>
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <div class="div3"></div>
+    <button id="trocar">Trocar Classes</button>
+
+    <script>
+        document.getElementById('trocar').addEventListener('click', function() {
+            const div1 = document.querySelector('.div1');
+            const div2 = document.querySelector('.div2');
+            const div3 = document.querySelector('.div3');
+
+            div1.classList.add('nova-classe'); // Adiciona nova classe à div1
+            div2.classList.remove('div2'); // Remove classe da div2
+            div3.classList.toggle('nova-classe'); // Alterna classe na div3
+        });
+    </script>
+</body>
+</html>
